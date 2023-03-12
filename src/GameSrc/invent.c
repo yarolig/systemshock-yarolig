@@ -2372,11 +2372,20 @@ uchar invent_hotkey_func(ushort keycode, uint32_t context, intptr_t data) {
 }
 
 uchar cycle_weapons_func(ushort keycode, uint32_t context, intptr_t data) {
+    printf("cycle_weapons_func %d %d %d\n", (int)keycode, (int) context, (int)data);
     if (global_fullmap->cyber) {
         int ac = player_struct.actives[ACTIVE_COMBAT_SOFT];
         int bound1 = (data > 0) ? NUM_COMBAT_SOFTS : -1;
         int bound2 = (data > 0) ? 0 : NUM_COMBAT_SOFTS - 1;
         int i;
+
+        if (IS_SPECIFIC_WEAPON_SLOT(data)) {
+            i = DECODE_SPECIFIC_WEAPON_SLOT(data);
+            data = 1;
+            if (0 <= i && i < NUM_COMBAT_SOFTS && player_struct.softs.combat[i] != 0) {
+                goto got_soft;
+            }
+        }
         for (i = ac + data; i != bound1; i += data)
             if (player_struct.softs.combat[i] != 0)
                 goto got_soft;
@@ -2389,7 +2398,12 @@ uchar cycle_weapons_func(ushort keycode, uint32_t context, intptr_t data) {
     } else {
         int aw = player_struct.actives[ACTIVE_WEAPON];
 
-        aw += data;
+        if (IS_SPECIFIC_WEAPON_SLOT(data)) {
+            aw = DECODE_SPECIFIC_WEAPON_SLOT(data);
+        } else {
+            aw += data;
+        }
+
         if (aw >= NUM_WEAPON_SLOTS || player_struct.weapons[aw].type == EMPTY_WEAPON_SLOT)
             aw = 0;
         else if (aw < 0) {

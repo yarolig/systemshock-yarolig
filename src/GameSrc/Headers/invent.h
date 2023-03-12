@@ -86,6 +86,10 @@ void super_use_func(int dispnum, int row);
 
 void absorb_object_on_cursor(ushort keycode, uint32_t context, intptr_t data);
 
+#define ENCODE_SPECIFIC_WEAPON_SLOT(n) (400+(n))
+#define IS_SPECIFIC_WEAPON_SLOT(n) (400<=(n)&&(n)<500)
+#define DECODE_SPECIFIC_WEAPON_SLOT(n) ((n)%100)
+
 uchar cycle_weapons_func(ushort keycode, uint32_t context, intptr_t data);
 
 void push_live_grenade_cursor(ObjID obj);

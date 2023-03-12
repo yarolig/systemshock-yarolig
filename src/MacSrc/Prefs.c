@@ -38,6 +38,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "mainloop.h"
 #include "movekeys.h"
 #include "mfdext.h"
+#include "invent.h"
+
 
 extern uchar mfd_button_callback_kb(ushort keycode, uint32_t context, intptr_t data);
 extern uchar hw_hotkey_callback(ushort keycode, uint32_t context, intptr_t data);
@@ -546,6 +548,13 @@ HOTKEYLOOKUP HotKeyLookup[] = {
     {"\"quit\"", DEMO_CONTEXT, demo_quit_func, 0, 0, CTRL('q'), 0},
     {"\"cycle_weapons 1\"", DEMO_CONTEXT, cycle_weapons_func, 1, 0, TAB_KEY, 0},
     {"\"cycle_weapons -1\"", DEMO_CONTEXT, cycle_weapons_func, -1, 0, S_TAB_KEY, 0},
+    {"\"select_weapon_slot 1\"", DEMO_CONTEXT, cycle_weapons_func, ENCODE_SPECIFIC_WEAPON_SLOT(0), 0, ALT('1'), 0},
+    {"\"select_weapon_slot 2\"", DEMO_CONTEXT, cycle_weapons_func, ENCODE_SPECIFIC_WEAPON_SLOT(1), 0, ALT('2'), 0},
+    {"\"select_weapon_slot 3\"", DEMO_CONTEXT, cycle_weapons_func, ENCODE_SPECIFIC_WEAPON_SLOT(2), 0, ALT('3'), 0},
+    {"\"select_weapon_slot 4\"", DEMO_CONTEXT, cycle_weapons_func, ENCODE_SPECIFIC_WEAPON_SLOT(3), 0, ALT('4'), 0},
+    {"\"select_weapon_slot 5\"", DEMO_CONTEXT, cycle_weapons_func, ENCODE_SPECIFIC_WEAPON_SLOT(4), 0, ALT('5'), 0},
+    {"\"select_weapon_slot 6\"", DEMO_CONTEXT, cycle_weapons_func, ENCODE_SPECIFIC_WEAPON_SLOT(5), 0, ALT('6'), 0},
+    {"\"select_weapon_slot 7\"", DEMO_CONTEXT, cycle_weapons_func, ENCODE_SPECIFIC_WEAPON_SLOT(6), 0, ALT('7'), 0},
     {"\"cycle_detail\"", DEMO_CONTEXT, MacDetailFunc, 0, 0, CTRL('1'), 0},
     {"\"toggle_opengl\"", EVERY_CONTEXT, toggle_opengl_func, 0, 0, CTRL('g'), 0},
     {"\"arm_grenade\"", DEMO_CONTEXT, arm_grenade_hotkey, 0, 0, ALT('\''), 0},
